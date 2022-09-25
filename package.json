@@ -1,0 +1,28 @@
+{
+  "name": "world-data",
+  "version": "1.0.0",
+  "description": "world countries and their population",
+  "main": "index.js",
+  "scripts": {
+    "tail": "tailwindcss -i ./styles/style.css -o ./styles/output.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zerebel/world-data.git"
+  },
+  "keywords": [
+    "population",
+    "countries",
+    "data",
+    "world"
+  ],
+  "author": "Zerebel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Zerebel/world-data/issues"
+  },
+  "homepage": "https://github.com/Zerebel/world-data#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
+  }
+}
