@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>World Countries</title>
     <link rel="stylesheet" href="styles/output.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body class="font-0">
     <header class="text-lg w-full flex flex-col text-center bg-slate-200 p-2">
       <h1 class="text-3xl tracking-widest text-yellow-600">
         World Countries Data
@@ -52,6 +56,25 @@
       id="countries-container"
       class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-7 grid-flow-row justify-center gap-2 items-center mt-4 bg-slate-200 py-4"
     ></main>
+
+    <div class="my-6 bg-slate-200 py-4">
+      <div class="flex justify-center items-center gap-4">
+        <button
+          class="bg-yellow-500 px-2 py-1 text-base transition-all ease-in delay-150 duration-300 hover:-translate-y-1 hover:scale-110 hover:text-gray-50"
+        >
+          Population
+        </button>
+        <button
+          class="bg-yellow-500 px-2 py-1 text-base transition-all ease-in delay-150 duration-300 hover:-translate-y-1 hover:scale-110 hover:text-gray-50"
+        >
+          Languages
+        </button>
+      </div>
+      <div
+        class="grid grid-cols-[auto,auto] md:grid-cols-[auto,1fr,auto] mt-8 px-4 md:px-8 lg:px-16 my-8 gap-4"
+        id="country-chart"
+      ></div>
+    </div>
     <script src="Js/country-data.js"></script>
     <script src="Js/index.js"></script>
   </body>
