@@ -4,7 +4,7 @@
   "description": "world countries and their population",
   "main": "index.js",
   "scripts": {
-    "tail": "tailwindcss -i ./styles/style.css -o ./styles/output.css"
+    "tail": "tailwindcss --watch -i ./styles/style.css -o ./styles/output.css"
   },
   "repository": {
     "type": "git",
