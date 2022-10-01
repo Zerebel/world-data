@@ -744,6 +744,10 @@ video {
   align-self: center;
 }
 
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
 .break-words {
   overflow-wrap: break-word;
 }
