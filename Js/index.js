@@ -142,7 +142,7 @@ const sort = (method) => {
 };
 //search for countries
 const search = () => {
-  const word = searchField.value.toLocaleLowerCase();
+  const word = searchField.value.toLocaleLowerCase().trim();
   const wordLenght = word.length;
   // Name
   const sortCountriesByName = country_data.filter((con) => {
@@ -224,7 +224,7 @@ const createChart = (arr) => {
       if (a.population < b.population) return 1;
       return 0;
     })
-    .splice(0, arr.length > 10 ? 10 : arr.length);
+    .splice(0, arr.length > 9 ? 9 : arr.length);
   const totalPopulation = country_data.reduce((a, b) => {
     return a + b.population;
   }, 0);
@@ -232,13 +232,7 @@ const createChart = (arr) => {
   const Worldwidth = document.createElement("div");
   const popu = document.createElement("p");
   world.textContent = "World";
-  Worldwidth.classList.add(
-    "w-full",
-    "bg-yellow-300",
-    "hidden",
-    "md:grid",
-    "max-w-sm"
-  );
+  Worldwidth.classList.add("w-full", "bg-yellow-300", "hidden", "md:grid");
   popu.textContent = totalPopulation;
   countryChart.appendChild(world);
   countryChart.appendChild(Worldwidth);

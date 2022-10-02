@@ -680,6 +680,12 @@ video {
   flex-basis: 33.333333%;
 }
 
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
 .grid-flow-row {
   grid-auto-flow: row;
 }
@@ -732,12 +738,20 @@ video {
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
 .gap-2 {
   gap: 0.5rem;
 }
 
 .gap-4 {
   gap: 1rem;
+}
+
+.self-end {
+  align-self: flex-end;
 }
 
 .self-center {
@@ -851,6 +865,23 @@ video {
   line-height: 1.25rem;
 }
 
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -880,6 +911,16 @@ video {
 .text-gray-50 {
   --tw-text-opacity: 1;
   color: rgb(249 250 251 / var(--tw-text-opacity));
+}
+
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.text-yellow-500 {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity));
 }
 
 .shadow-lg {
@@ -915,6 +956,14 @@ video {
   transition-duration: 150ms;
 }
 
+.transition {
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .delay-150 {
   transition-delay: 150ms;
 }
@@ -941,6 +990,26 @@ video {
 
 .duration-300 {
   transition-duration: 300ms;
+}
+
+.duration-\[\] {
+  transition-duration: ;
+}
+
+.duration-\[in\] {
+  transition-duration: in;
+}
+
+.duration-\[inf\] {
+  transition-duration: inf;
+}
+
+.duration-\[infinite\] {
+  transition-duration: infinite;
+}
+
+.duration-\[4000\] {
+  transition-duration: 4000;
 }
 
 .ease-in-out {
@@ -1049,6 +1118,10 @@ video {
     gap: 1rem;
   }
 
+  .md\:gap-8 {
+    gap: 2rem;
+  }
+
   .md\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -1060,8 +1133,24 @@ video {
     grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 
+  .lg\:gap-16 {
+    gap: 4rem;
+  }
+
   .lg\:px-16 {
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:gap-32 {
+    gap: 8rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .\32xl\:gap-48 {
+    gap: 12rem;
   }
 }
