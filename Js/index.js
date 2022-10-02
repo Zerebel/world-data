@@ -16,12 +16,10 @@ countryLenght.textContent = country_data.length;
 btnName.addEventListener("click", (e) => {
   // call arrow event
   Arrow(btnName, btnCapital, btnPopulation);
-  sort("name");
 });
 // Capital event
 btnCapital.addEventListener("click", (e) => {
   Arrow(btnCapital, btnName, btnPopulation);
-  sort("capital");
 });
 //Population event
 btnPopulation.addEventListener("click", (e) => {
@@ -93,51 +91,100 @@ const Arrow = (location, ...others) => {
     ArrowImg.src = "assets/arrow-down.svg";
     location.appendChild(ArrowImg);
     location.classList.remove("up");
+    if (location == btnName) {
+      sortName("ascending");
+    }
+    if (location == btnCapital) {
+      sortCapital("ascending");
+    }
+    if (location == btnPopulation) {
+      sortPopulation("ascending");
+    }
     return location.classList.add("down");
   }
 
   ArrowImg.src = "assets/arrow-up.svg";
   location.classList.add("up");
   location.classList.remove("down");
+  if (location == btnName) {
+    sortName("descending");
+  }
+  if (location == btnCapital) {
+    sortCapital("descending");
+  }
+  if (location == btnPopulation) {
+    sortPopulation("descending");
+  }
   return location.appendChild(ArrowImg);
 };
 // sort countries
-const sort = (method) => {
-  if (allSearchResults.length == 0) {
+const sortName = (order) => {
+  if (order == "ascending") {
     return createCountries(
-      country_data.sort((a, b) => {
+      search().sort((a, b) => {
         const nameA = a.name.toUpperCase();
         const nameB = b.name.toUpperCase();
         if (nameA < nameB) return -1;
-        if (nameA > nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      })
+    );
+  } else {
+    return createCountries(
+      search().reverse((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
         return 0;
       })
     );
   }
-  if (method) {
-    method = method.toLocaleLowerCase();
-    if (method == "name")
-      return createCountries(
-        allSearchResults.sort((a, b) => {
-          const nameA = a.name.toUpperCase();
-          const nameB = b.name.toUpperCase();
-          if (nameA < nameB) return -1;
-          if (nameA > nameB) return -1;
-          return 0;
-        })
-      );
-    if (method == "capital")
-      return createCountries(
-        allSearchResults.sort((a, b) => {
-          if (a.capital && b.capital) {
-            const capitalA = a.capital.toUpperCase();
-            const capitalB = b.capital.toUpperCase();
-            if (capitalA < capitalB) return -1;
-            if (capitalA > capitalB) return 1;
-            return 0;
-          }
-        })
-      );
+};
+
+const sortCapital = (order) => {
+  const countriArray = search().filter((a) => a.capital != undefined);
+  if (order == "ascending") {
+    return createCountries(
+      countriArray.sort((a, b) => {
+        const capitalA = a.capital.toLocaleLowerCase();
+        const capitalB = b.capital.toLocaleLowerCase();
+        if (capitalA < capitalB) return -1;
+        if (capitalA > capitalB) return 1;
+        return 0;
+      })
+    );
+  } else {
+    return createCountries(
+      countriArray.sort((a, b) => {
+        const capitalA = a.capital.toLocaleLowerCase();
+        const capitalB = b.capital.toLocaleLowerCase();
+        if (capitalA < capitalB) return 1;
+        if (capitalA > capitalB) return -1;
+        return 0;
+      })
+    );
+  }
+};
+
+const sortPopulation = (order) => {
+  const countryArray = search().filter((a) => a.population != undefined);
+  if (order == "ascending") {
+    return createCountries(
+      countryArray.sort((a, b) => {
+        if (a.population < b.population) return -1;
+        if (a.population > b.population) return 1;
+        return 0;
+      })
+    );
+  } else {
+    return createCountries(
+      countryArray.sort((a, b) => {
+        if (a.population < b.population) return 1;
+        if (a.population > b.population) return -1;
+        return 0;
+      })
+    );
   }
 };
 //search for countries
