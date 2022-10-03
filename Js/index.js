@@ -1,14 +1,18 @@
 //* Declaring variables
+/* #region//*  Variables */
 const countryLenght = document.querySelector("#country-lenght");
 const searchCriteria = document.querySelector("#search-criteria");
 const searchField = document.querySelector("#search-field");
 const btnName = document.querySelector("#btn-Name");
 const btnCapital = document.querySelector("#btn-Capital");
 const btnPopulation = document.querySelector("#btn-Population");
+const btnPopulationChart = document.querySelector("#btnPopulationChart");
+const btnLanguagesChart = document.querySelector("#btnLanguagesChart");
 const ArrowImg = document.createElement("img");
 const countryChart = document.querySelector("#country-chart");
 const countryContainer = document.querySelector("#countries-container");
 let allSearchResults = [];
+/* #endregion */
 //* Assigning varibales
 countryLenght.textContent = country_data.length;
 //* Event Listeners
@@ -25,6 +29,19 @@ btnCapital.addEventListener("click", (e) => {
 btnPopulation.addEventListener("click", (e) => {
   Arrow(btnPopulation, btnName, btnCapital);
 });
+// Populations Chart Event
+btnPopulationChart.addEventListener("click", (e) => {
+  return setTimeout(() => {
+    createChart(search());
+  }, 700);
+});
+// Languages Chart Event
+btnLanguagesChart.addEventListener("click", (e) => {
+  return setTimeout(() => {
+    createLangChart();
+  }, 700);
+});
+
 //** Fuctions */
 // Create country elements
 const createCountries = (arr) => {
@@ -272,9 +289,11 @@ const createChart = (arr) => {
       return 0;
     })
     .splice(0, arr.length > 9 ? 9 : arr.length);
+  // total population
   const totalPopulation = country_data.reduce((a, b) => {
     return a + b.population;
   }, 0);
+  // elements
   const world = document.createElement("p");
   const Worldwidth = document.createElement("div");
   const popu = document.createElement("p");
@@ -299,6 +318,56 @@ const createChart = (arr) => {
     countryChart.appendChild(conName);
     countryChart.appendChild(conWidth);
     countryChart.appendChild(conPopulation);
+  }
+  return;
+};
+
+const createLangChart = () => {
+  const langChart = search().reduce((ret, itm) => {
+    itm = itm.languages;
+    for (const item of itm) {
+      ret[item] = (ret[item] || 0) + 1;
+    }
+    return ret;
+  }, {});
+  let Tenlangs = Object.keys(langChart)
+    .map((a) => {
+      return { Language: a, Count: langChart[a] };
+    })
+    .sort((a, b) => {
+      if (a.Count < b.Count) return 1;
+      if (a.Count > b.Count) return -1;
+      return 0;
+    });
+  const TotalLanguages = Tenlangs.reduce((ind, itm) => {
+    return ind + itm.Count;
+  }, 0);
+  Tenlangs = Tenlangs.splice(0, 9);
+  countryChart.innerHTML = ``;
+  const worldLang = document.createElement("p");
+  const WorldLangWidth = document.createElement("div");
+  const lang = document.createElement("p");
+  worldLang.textContent = "World";
+  WorldLangWidth.classList.add("w-full", "bg-yellow-300", "hidden", "md:grid");
+  lang.textContent = TotalLanguages;
+  countryChart.appendChild(worldLang);
+  countryChart.appendChild(WorldLangWidth);
+  countryChart.appendChild(lang);
+  for (const lang of Tenlangs) {
+    const conName = document.createElement("p");
+    const conWidth = document.createElement("div");
+    const LangCount = document.createElement("p");
+    conName.textContent = lang.Language;
+    const width = lang.Count;
+    const widthPercentage = `${((width / TotalLanguages) * 100 + 20).toFixed(
+      2
+    )}%`;
+    conWidth.classList.add("bg-yellow-300", "hidden", "md:grid");
+    conWidth.style.width = widthPercentage;
+    LangCount.textContent = lang.Count;
+    countryChart.appendChild(conName);
+    countryChart.appendChild(conWidth);
+    countryChart.appendChild(LangCount);
   }
 };
 // Search- key up event
